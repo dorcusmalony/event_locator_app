@@ -22,6 +22,8 @@ const User = sequelize.define('User', {
   preferredCategories: {
     type: DataTypes.ARRAY(DataTypes.STRING),
   },
+}, {
+  timestamps: true,
 });
 
 module.exports = User;

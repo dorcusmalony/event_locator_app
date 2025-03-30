@@ -10,12 +10,10 @@ const Event = sequelize.define('Event', {
     type: DataTypes.TEXT,
   },
   location: {
-    type: DataTypes.GEOGRAPHY('POINT'),
-    allowNull: false,
+    type: DataTypes.GEOGRAPHY,
   },
   date: {
     type: DataTypes.DATE,
-    allowNull: false,
   },
   categories: {
     type: DataTypes.ARRAY(DataTypes.STRING),

@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
+const eventRoutes = require('./routes/eventRoutes'); // Include event routes
 const sequelize = require('./config/database');
 
 const app = express();
@@ -13,13 +14,19 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRoutes);
+app.use('/', eventRoutes); // Use event routes
 
-sequelize.sync()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+// Sync database and start server only if not in test environment
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.sync()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    })
+    .catch(err => {
+      console.error('Unable to connect to the database:', err);
     });
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
+}
+
+module.exports = app; // Ensure app is exported
