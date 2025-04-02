@@ -1,22 +1,22 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database');
 
-const Event = sequelize.define('Event', {
+const Event = sequelize.define('event', {
   title: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   description: {
     type: DataTypes.TEXT,
+    allowNull: true,
   },
   location: {
     type: DataTypes.GEOGRAPHY,
+    allowNull: false,
   },
-  date: {
+  event_date: {
     type: DataTypes.DATE,
-  },
-  categories: {
-    type: DataTypes.ARRAY(DataTypes.STRING),
+    allowNull: false,
   },
 });
 

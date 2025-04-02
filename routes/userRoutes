@@ -1,0 +1,10 @@
+const express = require('express');
+const userController = require('../controllers/userController');
+const authenticate = require('../middleware/authenticate');
+const router = express.Router();
+
+
+// Update user preferences
+router.put('/preferences', authenticate, userController.updatePreferences);
+
+module.exports = router;

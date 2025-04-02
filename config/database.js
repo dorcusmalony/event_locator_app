@@ -1,9 +1,8 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('event_locator_db', 'postgres', 'mosesalier@2023', {
+const sequelize = new Sequelize('event_locator', 'postgres', 'MosesAlier2023', {
   host: 'localhost',
-  dialect: 'postgres',
-  logging: console.log, // Enable logging for debugging purposes
+  dialect: 'postgres'
 });
 
 module.exports = sequelize;

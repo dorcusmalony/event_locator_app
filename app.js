@@ -1,20 +1,26 @@
-const express = require('express');
+const express = require('express'); // Import express
 const session = require('express-session');
 const passport = require('passport');
 const authRoutes = require('./routes/authRoutes');
-const eventRoutes = require('./routes/eventRoutes'); // Include event routes
+const eventRoutes = require('./routes/eventRoutes');
 const sequelize = require('./config/database');
 
+const userRoutes = require('./routes/userRoutes');
 const app = express();
-const PORT = process.env.PORT || 3000;
+// Your existing code.
+
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(session({ secret: 'your-secret-key', resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Register routes
+
 app.use('/auth', authRoutes);
-app.use('/', eventRoutes); // Use event routes
+app.use('/events', eventRoutes);
+app.use('/user', userRoutes);
 
 // Sync database and start server only if not in test environment
 if (process.env.NODE_ENV !== 'test') {
@@ -29,4 +35,4 @@ if (process.env.NODE_ENV !== 'test') {
     });
 }
 
-module.exports = app; // Ensure app is exported
+module.exports = app;
